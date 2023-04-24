@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
+import AuthService from "./services/auth.service";
+
+import Register from "./components/Register";
+
+const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <div>
+            <div className="container mt-3">
+        <Switch>
 
-export default App
+          <Route exact path="/register" component={Register} />
+
+        </Switch>
+      </div>
+    </div>
+  )
+};
+
+export default App;

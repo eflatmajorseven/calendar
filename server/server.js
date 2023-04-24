@@ -2,12 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const dbConfig = require("./config/db.config");
 
+
+
 const app = express();
 const path = __dirname + '/views/';
 app.use(express.static(path));
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:3000"
 };
 
 app.use(cors(corsOptions));
@@ -35,9 +37,12 @@ db.mongoose
 
 // simple route
 app.get("/", (req, res) => {
-  //res.sendFile(path + "index.html");
-  //res.json({ message: "Welcome" });
+  res.sendFile(path + "index.html");
+  res.json({ message: "Welcome" });
 });
+
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
