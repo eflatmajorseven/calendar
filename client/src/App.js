@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AuthService from "./services/auth.service";
 
 import Register from "./components/Register";
+import Login from "./components/Login"
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
         <Switch>
 
           <Route exact path="/register" component={Register} />
-
+          <Route exact path="/login" component={Login}/>
         </Switch>
       </div>
     </div>
