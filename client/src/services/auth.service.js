@@ -27,8 +27,17 @@ const login = (username, password) => {
       });
   };
 
+  const logout = () => {
+    localStorage.removeItem("user");
+  };
+  
+  const getCurrentUser = () => {
+    return JSON.parse(localStorage.getItem("user"));
+  };
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     register,
-    login
+    login,
+    logout,
+    getCurrentUser
 };
