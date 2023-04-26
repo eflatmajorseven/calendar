@@ -110,3 +110,14 @@ exports.signin = (req, res) => {
         });
       });
   };
+
+exports.getAllUsers = (req,res) => {
+  User.find({ })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((error)=> {
+        res.status(500).send({ message: err})
+        console.log('error retrieving users:', error)
+      })
+};

@@ -27,6 +27,18 @@ const login = (username, password) => {
       });
   };
 
+const getAllUsers = () => {
+  return (axios.get(API_URL + "users")
+  .then((response) => {
+    console.log("users recieved")
+      return response.data
+  })
+  .catch (()=>{
+    console.log("error retrieving users")
+  })
+  )
+};  
+
   const logout = () => {
     localStorage.removeItem("user");
   };
@@ -39,5 +51,6 @@ export default {
     register,
     login,
     logout,
-    getCurrentUser
+    getCurrentUser,
+    getAllUsers
 };
