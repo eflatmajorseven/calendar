@@ -45,4 +45,10 @@ module.exports = function(app) {
         controller.saveSlot
       );
 
+      app.post(
+        "/api/auth/removeuser",
+        [authJwt.verifyToken],
+        controller.removeUser
+      )
+
 };

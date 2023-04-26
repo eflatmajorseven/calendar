@@ -84,6 +84,17 @@ const logout = () => {
     },
     {headers: authHeader()})
   };
+
+  const removeUser = (id) => {
+    return axios.
+    post(API_URL + "removeuser",
+    {
+      id
+    },
+    {headers: authHeader()}
+
+     )
+  }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     register,
@@ -93,5 +104,6 @@ export default {
     getAllUsers,
     getSlots,
     createSlotAdmin,
-    saveSlot
+    saveSlot,
+    removeUser
 };

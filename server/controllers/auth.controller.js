@@ -173,3 +173,17 @@ exports.saveSlot = (req,res) => {
     })
   }) 
 }
+
+exports.removeUser = (req,res) => {
+  console.log(req.body.id)
+  User.findByIdAndDelete(req.body.id)
+  .exec()
+  .then(doc => {
+    if (!doc) {return res.status(404).end();}
+    return res.status(204).end;
+  })
+  .catch((error) => {
+    console.log('error removing user: ', error);
+});
+  
+}
