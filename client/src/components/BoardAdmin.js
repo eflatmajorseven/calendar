@@ -9,6 +9,12 @@ const BoardAdmin = () => {
   const [users, setUsers] = useState("");
 
   useEffect(() => {
+    AuthService.getAllUsers().then(
+      (response) => {
+        setUsers(response);
+      }
+    )
+
     UserService.getAdminBoard().then(
       (response) => {
         setContent(response.data);
@@ -29,32 +35,16 @@ const BoardAdmin = () => {
       }
     );
 
-    AuthService.getAllUsers().then(
-      (response) => {
-        setUsers(response);
-        
-      },
-      (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
 
-        setContent(_content);
-          }
-
-    );
     
   }, []);
 
   const printUsers = (users) => {
+    if (!users) return null;
     return users.map(( {name }) => (
       <h2>{name}</h2>)
     )
   }
-
 
   return (
     <div className="container">
@@ -66,5 +56,6 @@ const BoardAdmin = () => {
      </div>
   );
 };
+
 
 export default BoardAdmin;

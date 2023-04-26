@@ -1,4 +1,5 @@
 import axios from "axios";
+import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:8080/api/auth/";
 
@@ -28,7 +29,7 @@ const login = (username, password) => {
   };
 
 const getAllUsers = () => {
-  return (axios.get(API_URL + "users")
+  return (axios.get(API_URL + "users", { headers: authHeader() })
   .then((response) => {
     console.log("users recieved")
       return response.data
@@ -39,12 +40,35 @@ const getAllUsers = () => {
   )
 };  
 
-  const logout = () => {
+const logout = () => {
     localStorage.removeItem("user");
   };
   
   const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));
+  };
+
+  const getSlots = () => {
+    return axios.
+    get(API_URL + "slots", { headers: authHeader() } )
+    .then((response) => {
+      return response.data;
+    })
+    .catch(() => {
+      console.log("error retrieving slots")
+    })
+  }
+
+  const createSlotAdmin = (name,lastname,date) => {
+    //alert(name);
+    return axios.
+    post(API_URL + "slot", { headers: authHeader() }, {
+      name,
+      lastname,
+      date
+    }).then((response) => {
+          return response.data;
+    });
   };
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -52,5 +76,7 @@ export default {
     login,
     logout,
     getCurrentUser,
-    getAllUsers
+    getAllUsers,
+    getSlots,
+    createSlotAdmin
 };
