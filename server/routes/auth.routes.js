@@ -28,4 +28,16 @@ module.exports = function(app) {
             controller.getAllUsers
       )
 
+      app.post(
+        "/api/auth/slot", 
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.createSlotAdmin
+      );
+      
+      app.get(
+        "/api/auth/slots",
+        [authJwt.verifyToken],
+        controller.getAllSlots
+      );
+
 };

@@ -62,14 +62,17 @@ const logout = () => {
   const createSlotAdmin = (name,lastname,date) => {
     //alert(name);
     return axios.
-    post(API_URL + "slot", { headers: authHeader() }, {
+    post(API_URL + "slot", {
       name,
       lastname,
       date
-    }).then((response) => {
+    },
+    { headers: authHeader() 
+    }
+    ).then((response) => {
           return response.data;
     });
-  };
+  }; 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     register,

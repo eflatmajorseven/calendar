@@ -2,6 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
+const Slot = db.slot;
 
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
@@ -120,4 +121,32 @@ exports.getAllUsers = (req,res) => {
         res.status(500).send({ message: err})
         console.log('error retrieving users:', error)
       })
+};
+
+exports.getAllSlots = (req,res) => {
+  Slot.find({ })
+        .then((data)=> {
+          //console.log(data);
+          res.json(data);
+          })
+        .catch((error)=>{
+          console.log('error: ', error);
+        })
+};
+
+exports.createSlotAdmin = (req,res) => {
+  console.log("slotas: " + req.body.name)
+  //res.send({message: req.body.name + req.body.lastname})
+const slot = new Slot({
+  name: req.body.name,
+  lastname: req.body.lastname,
+  date: req.body.date
+})
+slot.save((err) => {
+  if (err) {
+    res.status(500).send({ message: err });
+    return;
+  }
+  res.send({message: "padarem slota"})
+})
 };

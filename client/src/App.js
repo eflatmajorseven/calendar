@@ -14,6 +14,7 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import Calendar from "./components/Calendar";
+import Slot from "./components/Slot";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -143,6 +144,7 @@ const App = () => {
           <Route path="/mod" component={BoardModerator} />
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/calendar" component={Calendar}/>
+          <Route path="/slot" component={Slot}/>
         </Switch>
       </div>
       { <AuthVerify logOut={logOut}/> }
