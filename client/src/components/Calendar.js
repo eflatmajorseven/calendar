@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin from "@fullcalendar/interaction" // needed for dayClick
 import AuthService from "../services/auth.service"
 import Slot from './Slot'
+import SlotUser from './SlotUser'
 
 const CALENDAR_STYLES = {
     position: 'relative',
@@ -30,7 +31,8 @@ export default function Calendar () {
     
         return slots.map((slot) => (
           { value:slot,
-            title:slot.name+" "+slot.lastname.charAt(0),
+            title:slot.name+" "+slot.lastname.charAt(0)+" "+
+            slot.startShift + "--- " + slot.endShift,
             date:slot.date
            }
            
@@ -42,7 +44,13 @@ export default function Calendar () {
         setDate(arg.dateStr);
         //alert("test");
           }
-    
+          
+      const handleEventClick = (clickInfo) => {
+            setIsOpenUser(true)
+            setSlot(clickInfo.event.extendedProps.value)
+             // alert(clickInfo.event.extendedProps.value)
+              
+          }    
     
     return (
         <div>
@@ -52,12 +60,18 @@ export default function Calendar () {
                     dateClick={handleDateClick}
                     eventContent={renderEventContent}
                     events={populateSlots(slots)}
+                    eventClick={handleEventClick}
                 />
             </div>
             
       <Slot open={isOpen} onClose={()=> setIsOpen(false)}
       date={date}>         
       </Slot>
+
+      <SlotUser open={isOpenUser} onClose={()=> setIsOpenUser(false)}
+      slot={slotas}>         
+      </SlotUser>
+      
     
         </div>
     )

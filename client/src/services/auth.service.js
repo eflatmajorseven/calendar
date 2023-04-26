@@ -73,6 +73,17 @@ const logout = () => {
           return response.data;
     });
   }; 
+
+  const saveSlot = (id,startShift,endShift) => {
+    //alert(name);
+    return axios.
+    post(API_URL + "saveslot", {
+      id,
+      startShift,
+      endShift
+    },
+    {headers: authHeader()})
+  };
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     register,
@@ -81,5 +92,6 @@ export default {
     getCurrentUser,
     getAllUsers,
     getSlots,
-    createSlotAdmin
+    createSlotAdmin,
+    saveSlot
 };

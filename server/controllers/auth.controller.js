@@ -140,7 +140,9 @@ exports.createSlotAdmin = (req,res) => {
 const slot = new Slot({
   name: req.body.name,
   lastname: req.body.lastname,
-  date: req.body.date
+  date: req.body.date,
+  startShift: null,
+  endShift: null
 })
 slot.save((err) => {
   if (err) {
@@ -150,3 +152,24 @@ slot.save((err) => {
   res.send({message: "padarem slota"})
 })
 };
+
+exports.saveSlot = (req,res) => {
+  console.log("saveslot api:" + req.body.id)
+  Slot.findByIdAndUpdate(req.body.id, {
+    startShift: req.body.startShift,
+    endShift: req.body.endShift
+  })
+  .then(user => {
+    if (!user){
+      return res.status(404).send({
+        message: "slot not found by id" + req.body.id
+      })
+    }
+    res.send(user)
+  })
+  .catch(err => {
+    return res.status(500).send({
+      message: "error updating slot by id" + req.body.id
+    })
+  }) 
+}

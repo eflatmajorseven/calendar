@@ -39,5 +39,10 @@ module.exports = function(app) {
         [authJwt.verifyToken],
         controller.getAllSlots
       );
+      app.post(
+        "/api/auth/saveslot", 
+        [authJwt.verifyToken],
+        controller.saveSlot
+      );
 
 };
