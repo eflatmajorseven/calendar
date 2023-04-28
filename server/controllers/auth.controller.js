@@ -2,6 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
+const Slot = db.slot;
 
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
@@ -110,3 +111,79 @@ exports.signin = (req, res) => {
         });
       });
   };
+
+exports.getAllUsers = (req,res) => {
+  User.find({ })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((error)=> {
+        res.status(500).send({ message: err})
+        console.log('error retrieving users:', error)
+      })
+};
+
+exports.getAllSlots = (req,res) => {
+  Slot.find({ })
+        .then((data)=> {
+          //console.log(data);
+          res.json(data);
+          })
+        .catch((error)=>{
+          console.log('error: ', error);
+        })
+};
+
+exports.createSlotAdmin = (req,res) => {
+  console.log("slotas: " + req.body.name)
+  //res.send({message: req.body.name + req.body.lastname})
+const slot = new Slot({
+  name: req.body.name,
+  lastname: req.body.lastname,
+  date: req.body.date,
+  startShift: null,
+  endShift: null
+})
+slot.save((err) => {
+  if (err) {
+    res.status(500).send({ message: err });
+    return;
+  }
+  res.send({message: "padarem slota"})
+})
+};
+
+exports.saveSlot = (req,res) => {
+  console.log("saveslot api:" + req.body.id)
+  Slot.findByIdAndUpdate(req.body.id, {
+    startShift: req.body.startShift,
+    endShift: req.body.endShift
+  })
+  .then(user => {
+    if (!user){
+      return res.status(404).send({
+        message: "slot not found by id" + req.body.id
+      })
+    }
+    res.send(user)
+  })
+  .catch(err => {
+    return res.status(500).send({
+      message: "error updating slot by id" + req.body.id
+    })
+  }) 
+}
+
+exports.removeUser = (req,res) => {
+  console.log(req.body.id)
+  User.findByIdAndDelete(req.body.id)
+  .exec()
+  .then(doc => {
+    if (!doc) {return res.status(404).end();}
+    return res.status(204).end;
+  })
+  .catch((error) => {
+    console.log('error removing user: ', error);
+});
+  
+}

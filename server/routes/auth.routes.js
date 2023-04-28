@@ -23,4 +23,32 @@ module.exports = function(app) {
 
     app.post("/api/auth/signin", controller.signin); 
 
+    app.get("/api/auth/users",
+            [authJwt.verifyToken, authJwt.isAdmin],
+            controller.getAllUsers
+      )
+
+      app.post(
+        "/api/auth/slot", 
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.createSlotAdmin
+      );
+      
+      app.get(
+        "/api/auth/slots",
+        [authJwt.verifyToken],
+        controller.getAllSlots
+      );
+      app.post(
+        "/api/auth/saveslot", 
+        [authJwt.verifyToken],
+        controller.saveSlot
+      );
+
+      app.post(
+        "/api/auth/removeuser",
+        [authJwt.verifyToken],
+        controller.removeUser
+      )
+
 };
