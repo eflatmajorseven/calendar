@@ -3,11 +3,12 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken")
 const dbConfig = require("./config/db.config");
 const config = require("./config/auth.config.js");
+//const path = require('path');
 
 
 
 const app = express();
-const path = __dirname + '/views/';
+const path = __dirname + '\\build\\';
 app.use(express.static(path));
 
 var corsOptions = {
@@ -40,7 +41,7 @@ db.mongoose
 // simple route
 app.get("/", (req, res) => {
   res.sendFile(path + "index.html");
-  res.json({ message: "Welcome" });
+  res.json({ message: "hi" });
 });
 
 require("./routes/auth.routes")(app);
@@ -51,6 +52,9 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
+// app.get('*', (req, res) => {
+//       res.sendFile(path+'index.html');
+// })
 
 function initial() {
   Role.estimatedDocumentCount((err, count) => {
