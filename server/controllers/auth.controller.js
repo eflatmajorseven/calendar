@@ -1,5 +1,6 @@
 const db = require("../models");
 const config = require("../config/auth.config");
+
 const User = db.user;
 const Role = db.role;
 const Slot = db.slot;
@@ -123,6 +124,18 @@ exports.getAllUsers = (req,res) => {
       })
 };
 
+exports.getUserById = (req,res) => {
+  console.log(req.params.id)
+  User.findById(req.params.id, function (err, data){
+    if (!data){
+      res.status(404).send({message: "User not found"})
+    }
+    else {
+      res.json(data);
+    }
+  }
+)};
+
 exports.getAllSlots = (req,res) => {
   Slot.find({ })
         .then((data)=> {
@@ -172,4 +185,17 @@ exports.saveSlot = (req,res) => {
       message: "error updating slot by id" + req.body.id
     })
   }) 
+}
+
+exports.removeUser = (req,res) => {
+  console.log(req.params.id)
+  User.findByIdAndDelete(req.params.id)
+  .exec()
+  .then(doc => {
+    if (!doc) {return res.status(404).end();}
+    return res.status(204).end;
+  })
+  .catch((error) => {
+    console.log('error removing user: ', error);
+});
 }

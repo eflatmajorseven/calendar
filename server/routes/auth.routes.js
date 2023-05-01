@@ -27,6 +27,10 @@ module.exports = function(app) {
             [authJwt.verifyToken, authJwt.isAdmin],
             controller.getAllUsers
       )
+    app.get("/api/auth/user/:id",
+          [authJwt.verifyToken],
+          controller.getUserById
+    )
 
       app.post(
         "/api/auth/slot", 
@@ -43,6 +47,12 @@ module.exports = function(app) {
         "/api/auth/saveslot", 
         [authJwt.verifyToken],
         controller.saveSlot
+      );
+
+      app.delete(
+        "/api/auth/removeuser/:id",
+        [authJwt.verifyToken, authJwt.isAdmin],
+        controller.removeUser
       );
 
 };

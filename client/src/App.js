@@ -15,6 +15,7 @@ import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import Calendar from "./components/Calendar";
 import Slot from "./components/Slot";
+import UserDelete from "./components/UserDelete";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
@@ -76,6 +77,14 @@ const App = () => {
             </li>
           )}
           
+          {showAdminBoard && (
+            <li className="nav-item">
+              <Link to={"/userdelete"} className="nav-link">
+                Users' manager
+              </Link>
+            </li>
+          )}
+
           {currentUser && (
 
             <li className="nav-item">
@@ -145,6 +154,7 @@ const App = () => {
           <Route path="/admin" component={BoardAdmin} />
           <Route path="/calendar" component={Calendar}/>
           <Route path="/slot" component={Slot}/>
+          <Route path="/userdelete" component={UserDelete}/>
         </Switch>
       </div>
       { <AuthVerify logOut={logOut}/> }
