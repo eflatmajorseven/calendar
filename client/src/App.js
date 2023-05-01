@@ -84,6 +84,14 @@ const App = () => {
             </li>
           )}
           
+          {showAdminBoard && (
+            <li className="nav-item">
+              <Link to={"/userdelete"} className="nav-link">
+                Users' manager
+              </Link>
+            </li>
+          )}
+
           {currentUser && (
 
             <li className="nav-item">

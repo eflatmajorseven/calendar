@@ -38,7 +38,7 @@ const getAllUsers = () => {
     console.log("error retrieving users")
   })
   )
-};  
+};
 
 const logout = () => {
     localStorage.removeItem("user");
@@ -87,14 +87,11 @@ const logout = () => {
 
   const removeUser = (id) => {
     return axios.
-    post(API_URL + "removeuser",
-    {
-      id
-    },
-    {headers: authHeader()}
-
-     )
+    delete(API_URL + "removeuser/" + id, {
+      headers: authHeader()
+    })
   }
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     register,
