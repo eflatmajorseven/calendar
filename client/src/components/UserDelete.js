@@ -25,19 +25,13 @@ const Table = () => {
             const del = employees.filter(employee => id !== employee.id)
             setEmployees(del)
         })
-        //Istrinti is DB, jei ID nera tai tada paduoti e-mail ir pagal ji istrinti elementa
-
     }
-
     const renderHeader = () => {
-        //Surenderina lenteles virsu
         let headerElement = ['name', 'email', 'operation']
-
         return headerElement.map((key, index) => {
             return <th key={index}>{key.toUpperCase()}</th>
         })
     }
-
     const renderBody = () => {
         //Pati lentele
         /*
@@ -61,7 +55,6 @@ const Table = () => {
             )
         })
     }
-
     return (
         <>
             <h1 id='title'>Users Manager</h1>

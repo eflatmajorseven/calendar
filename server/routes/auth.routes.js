@@ -48,11 +48,9 @@ module.exports = function(app) {
         [authJwt.verifyToken],
         controller.saveSlot
       );
-
       app.delete(
         "/api/auth/removeuser/:id",
         [authJwt.verifyToken, authJwt.isAdmin],
         controller.removeUser
       );
-
 };
