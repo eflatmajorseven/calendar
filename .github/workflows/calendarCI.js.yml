@@ -5,7 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master", "slot-feature" ]
+    branches: 
+    - "master"
+    - "slot-feature"
     
   pull_request:
     branches: [ "master" ]
